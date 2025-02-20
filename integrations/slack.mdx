@@ -1,0 +1,84 @@
+---
+title: 'Slack Integration'
+description: 'Connect your Bugster E2E tests with Slack to receive automated test results and notifications directly in your Slack channels. Get instant updates about test executions, failures, and group results.'
+icon: 'slack'
+---
+
+## Setup Process
+
+### 1. Slack Configuration
+Watch our detailed video tutorial on installing and configuring the Slack App:
+
+<video 
+  controls
+  className="w-full aspect-video"
+  src="/media/slack-1.mp4"
+></video>
+
+This video shows how to:
+- Install the Bugster Slack App
+- Configure workspace permissions
+- Select target channels
+- Set up notification preferences
+
+### 2. Connected Status
+Once properly configured, you'll see the connected status in your Slack workspace:
+
+<img 
+  className="w-full"
+  src="/media/slack-connected.png" 
+  alt="Slack Connected Status"
+/>
+
+## Notification Examples
+
+### Individual Test Failure
+When a single test fails, you'll receive a detailed notification:
+
+```
+❌ Flow Execution Failed  
+🔍 Flow: #vQuxTgv611AZGBF8r3kl  
+
+🚨 Issue detected during execution.  
+🕒 10/2/2025, 5:02:17 p.m.  
+
+🔗 Debug here: https://app.bugster.dev/flows/flowexecution/vQuxTgv611AdGBf8r3kl  
+```
+
+### Group Execution Results
+For group executions, you'll get a summary of all tests:
+
+```
+📢 Most Recent Flow Group - #Test 4/2/2025  
+🕒 10/2/2025, 4:56:37 p.m. - UI  
+
+🔍 Go to full report: 🔗 https://app.bugster.dev/flowgroups/result/InjHS8dK4fSPW8nzSa4y  
+
+✅ 1 Passed  
+❌ 1 Failed  
+```
+
+## Features
+
+- Instant notifications for test failures and results
+- Detailed execution information with direct links
+- Customizable notification channels
+- Support for both individual and group test results
+
+## Best Practices
+
+- Create dedicated channels for test notifications
+- Set up different channels for different environments
+- Use clear channel naming conventions
+- Configure notification preferences to avoid noise
+
+## Troubleshooting
+
+Common issues and solutions:
+
+- **Connection Issues**: Verify Slack App installation
+- **Missing Notifications**: Check channel configurations
+- **Permission Problems**: Review workspace permissions
+- **Message Format Issues**: Validate notification settings
+
+Need help? Contact our support team. 

@@ -1,0 +1,134 @@
+---
+title: "Vue.js Integration Guide"
+description: "Learn how to integrate Bugster SDK into your Vue.js application"
+icon: "vuejs"
+---
+
+## Integrate Bugster SDK with Vue.js
+
+This guide will help you integrate Bugster SDK into your Vue.js project.
+
+---
+
+## Prerequisites
+
+Before getting started, ensure you have:
+
+- A Vue.js project set up (version 3.0 or later)
+- Node.js and npm installed
+- A Bugster account with an API key
+
+---
+
+## Step 1: Install the Bugster SDK
+
+Install Bugster SDK using your package manager:
+
+```bash
+npm i @bugster/bugster-js
+```
+
+---
+
+## Step 2: Activate your plugin
+
+Create a Bugster plugin to make the SDK accessible globally across your Vue application.
+
+Create a new file `src/plugins/bugsterPlugin.js` with the following content:
+
+```javascript
+// src/plugins/bugsterPlugin.js
+import { BugsterTracker } from "@bugster/bugster-js";
+
+const bugsterPlugin = {
+  install(app, options) {
+    // Initialize BugsterTracker
+    const bugster = new BugsterTracker({
+      apiKey: options.apiKey || "YOUR_API_KEY",
+      endpoint: "https://i.bugster.app",
+    });
+
+    // Add the Bugster instance to the app's global context
+    app.config.globalProperties.$bugster = bugster;
+
+    // Optional: the tracker can also be provided for injection elsewhere
+    app.provide("bugster", bugster);
+  },
+};
+
+export default bugsterPlugin;
+```
+
+Or you can do it for `Vue 2`:
+
+```javascript
+// src/plugins/bugsterPlugin.js
+import { BugsterTracker } from "@bugster/bugster-js";
+
+const bugsterPlugin = {
+  install(Vue, options) {
+    // Initialize BugsterTracker
+    const bugster = new BugsterTracker({
+      apiKey: options.apiKey || "YOUR_API_KEY",
+      endpoint: "https://i.bugster.app",
+    });
+
+    // Set Bugster on the Vue prototype
+    Vue.prototype.$bugster = bugster;
+
+    // Optional: you can also provide the bugster for injection elsewhere
+    Vue.prototype.$bugsterInstance = bugster;
+  },
+};
+
+export default bugsterPlugin;
+```
+
+---
+
+## Step 3: Initialize the Bugster Plugin
+
+In your main Vue application file (usually `main.js` or `main.ts`), initialize the Bugster plugin:
+
+```javascript
+import { createApp } from "vue";
+import App from "./App.vue";
+import bugsterPlugin from "./plugins/bugsterPlugin";
+
+const app = createApp(App);
+
+app.use(bugsterPlugin, {
+  apiKey: "YOUR_API_KEY",
+  endpoint: "https://i.bugster.app",
+});
+
+app.mount("#app");
+```
+
+Or you can do it for `Vue 2`:
+
+```javascript
+// src/main.js
+import Vue from "vue";
+import App from "./App.vue";
+import bugsterPlugin from "./plugins/bugsterPlugin";
+
+Vue.use(bugsterPlugin, {
+  apiKey: "YOUR_API_KEY",
+  endpoint: "https://i.bugster.app",
+});
+
+new Vue({
+  render: (h) => h(App),
+}).$mount("#app");
+```
+
+---
+
+## Conclusion
+
+You've now successfully integrated Bugster SDK into your Vue.js application. This integration allows you to capture user interactions, generate automated tests, and improve the overall quality of your Vue app.
+
+For more advanced usage and configuration options, refer to the [Bugster SDK API Reference](/api-reference) and the [Advanced Configuration Guide](/advanced-configuration).
+
+If you encounter any issues or have questions, don't hesitate to [contact our support team](https://bugster.app/contact).

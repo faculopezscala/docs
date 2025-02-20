@@ -1,0 +1,147 @@
+---
+title: "Privacy Compliance"
+description: "Understanding Bugster SDK approach to data privacy and regulatory compliance"
+icon: "scale-balanced"
+---
+
+## Introduction
+
+At Bugster, we take data privacy seriously. This guide explains how Bugster SDK handles personal data and how you can configure it to comply with various privacy regulations such as GDPR, CCPA, and PECR.
+
+## Data Collection
+
+Bugster SDK collects various types of data to provide insights into user behavior. This includes:
+
+- User interactions (clicks, form submissions, page views)
+- Device and browser information
+- IP addresses (by default, for geolocation purposes)
+- Cookies and local storage data
+
+It's important to note that Bugster SDK is designed to be configurable, allowing you to control what data is collected and how it's processed.
+
+## Compliance with Privacy Regulations
+
+### GDPR Compliance
+
+To help you comply with GDPR:
+
+1. **Data Minimization**: Configure Bugster SDK to collect only the data you need.
+
+   ```javascript
+   const bugster = new BugsterTracker({
+     apiKey: "YOUR_API_KEY",
+     capturePageview: false, // Disable automatic pageview tracking
+     captureUtm: false, // Disable UTM parameter capture
+   });
+   ```
+
+2. **Right to be Forgotten**: Use the `deleteUser` method to remove a user's data.
+
+   ```javascript
+   bugster.deleteUser("user-id-to-delete");
+   ```
+
+3. **Data Portability**: Implement a data export feature using Bugster's API (contact support for details).
+
+### CCPA Compliance
+
+For CCPA compliance
+
+1. **Right to Opt-Out**: Provide a way for California residents to opt-out of data collection.
+
+   ```javascript
+   if (userOptedOut) {
+     bugster.optOut();
+   }
+   ```
+
+2. **Data Access and Deletion**: Use Bugster's API to provide users with their data or delete it upon request.
+
+### PECR and Cookie Law
+
+To comply with PECR and similar cookie laws:
+
+1. **Cookie Consent**: Only initialize Bugster SDK after obtaining user consent.
+
+   ```javascript
+   if (userHasGivenConsent) {
+     initializeBugsterTracker();
+   }
+   ```
+
+2. **Cookie Information**: Clearly inform users about the cookies set by Bugster SDK in your privacy policy.
+
+## IP Address Anonymization
+
+To anonymize IP addresses:
+
+```javascript
+const bugster = new BugsterTracker({
+  apiKey: "YOUR_API_KEY",
+  anonymizeIP: true,
+});
+```
+
+This will replace the last octet of IPv4 addresses and the last 80 bits of IPv6 addresses with zeros.
+
+## Sensitive Data Protection
+
+Bugster SDK automatically tries to avoid capturing sensitive data:
+
+1. **Password Fields**: Input from password fields is automatically masked.
+2. **Credit Card Numbers**: Detected credit card numbers are masked.
+
+You can add additional protection for sensitive fields:
+
+```javascript
+bugster.maskInput("#sensitive-field");
+```
+
+## Data Retention
+
+By default, Bugster retains data for 30 days. You can configure this period:
+
+```javascript
+const bugster = new BugsterTracker({
+  apiKey: "YOUR_API_KEY",
+  dataRetentionDays: 14, // Set data retention to 14 days
+});
+```
+
+## User Identification
+
+Bugster SDK uses a combination of techniques to identify users:
+
+1. **Anonymous ID**: A randomly generated ID stored in cookies or local storage.
+2. **Distinct ID**: An ID you can set to identify logged-in users.
+
+Use the `identify` method to set a distinct ID:
+
+```javascript
+bugster.identify("user-123", {
+  name: "John Doe",
+  email: "john@example.com",
+});
+```
+
+## Data Processing Agreements
+
+If you're using Bugster as a data processor, we offer a Data Processing Agreement (DPA). Contact our support team to set this up.
+
+## Privacy by Design
+
+Bugster SDK is built with privacy in mind:
+
+- Data is encrypted in transit using HTTPS.
+- You have full control over what data is collected and how it's used.
+- We provide tools for data minimization and anonymization.
+
+## Regular Audits
+
+We recommend regularly auditing your Bugster SDK configuration and usage to ensure ongoing compliance with privacy regulations.
+
+## Further Information
+
+For more detailed information about privacy compliance with Bugster SDK, please refer to our [full privacy documentation](https://docs.bugster.app/privacy) or contact our support team.
+
+Remember, while we provide tools and features to help with compliance, it's ultimately your responsibility to ensure that your use of Bugster SDK complies with all applicable laws and regulations.

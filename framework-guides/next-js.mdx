@@ -1,0 +1,126 @@
+---
+title: "Next.js Integration Guide"
+description: "Learn how to integrate Bugster SDK into your Next.js application"
+icon: "n"
+---
+
+## Integrate Bugster SDK with Next.js
+
+This guide will help you integrate Bugster SDK into your Next.js project and start using its automated testing capabilities.
+
+---
+
+## Prerequisites
+
+Before getting started, ensure you have:
+
+- A Next.js project set up (version 10.0 or later)
+- Node.js and npm installed
+- A Bugster account with an API key
+
+---
+
+## Step 1: Install the Bugster SDK
+
+Install Bugster SDK using your package manager:
+
+```bash
+npm i @bugster/bugster-js
+```
+
+---
+
+## Step 2: Add Environment Variables
+
+Add your environment variables to your `.env.local` file and your hosting provider (such as Vercel, Netlify, AWS). You can find your project API key in your project settings.
+
+```bash
+NEXT_PUBLIC_BUGSTER_KEY=YOUR_API_KEY
+```
+
+---
+
+## Step 3: Initialize Bugster SDK
+
+### Pages Router
+
+For the Pages Router, initialize Bugster SDK in a custom `_app.js` file.
+
+Create or modify `pages/_app.js`:
+
+```typescript
+import { BugsterTracker } from "@bugster/bugster-js";
+
+let bugster: BugsterTracker | null = null;
+
+useEffect(() => {
+  if (
+    typeof window !== "undefined" &&
+    process.env.NEXT_PUBLIC_BUGSTER_API_KEY
+  ) {
+    bugster = new BugsterTracker({
+      apiKey: process.env.NEXT_PUBLIC_BUGSTER_API_KEY,
+      endpoint: "https://i.bugster.app",
+    });
+  }
+}, []); 
+```
+
+### App Router
+
+For the App Router, initialize Bugster SDK in a client-side component.
+
+Create a new file `app/components/BugsterProvider.tsx`:
+
+```typescript
+"use client";
+
+import { BugsterTracker } from "@bugster/bugster-js";
+import { useEffect } from "react";
+
+interface BugsterProviderProps {
+  apiKey: string;
+  children: React.ReactNode;
+}
+
+let bugsterInstance: any = null;
+
+export function BugsterProvider({ apiKey, children }: BugsterProviderProps) {
+  useEffect(() => {
+    if (typeof window !== "undefined" && !bugsterInstance) {
+      bugsterInstance = new BugsterTracker({
+        apiKey,
+        endpoint: "https://i.bugster.app",
+      });
+    }
+  }, [apiKey]);
+
+  return children;
+}
+```
+
+Then, import and use this component in your root layout (`app/layout.tsx`):
+
+```typescript
+import { BugsterProvider } from "./components/BugsterProvider";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <BugsterProvider apiKey="your-bugster-api-key">...</BugsterProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+---
+
+## Conclusion
+
+You've now successfully integrated Bugster SDK into your Next.js application. This integration allows you to capture user interactions, generate automated tests, and improve the overall quality of your Next.js app.
+
+For more advanced usage and configuration options, refer to the [Bugster SDK API Reference](/api-reference) and the [Advanced Configuration Guide](/advanced-configuration).
+
+If you encounter any issues or have questions, don't hesitate to [contact our support team](https://bugster.app/contact).

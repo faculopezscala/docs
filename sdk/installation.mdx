@@ -1,0 +1,126 @@
+---
+title: 'Installation & Setup'
+description: 'Get started with Bugster SDK in your project'
+icon: 'download'
+---
+
+## Installation
+
+First, install the Bugster SDK package using your preferred package manager:
+
+<CodeGroup>
+
+```bash npm
+npm install @bugster/bugster-js
+```
+
+```bash yarn
+yarn add @bugster/bugster-js
+```
+
+```bash pnpm
+pnpm add @bugster/bugster-js
+```
+
+</CodeGroup>
+
+## Basic Setup
+
+After installing the package, import and initialize Bugster SDK in your application:
+
+<CodeGroup>
+
+```javascript JavaScript
+import BugsterTracker from '@bugster/bugster-js';
+
+BugsterTracker.init({
+  apiKey: 'YOUR_BUGSTER_API_KEY',
+  onInitialized: () => {
+    console.log('Bugster SDK initialized successfully!');
+  },
+});
+```
+
+```typescript TypeScript
+import { BugsterTracker } from '@bugster/bugster-js';
+
+BugsterTracker.init({
+  apiKey: 'YOUR_BUGSTER_API_KEY',
+  onInitialized: () => {
+    console.log('Bugster SDK initialized successfully!');
+  },
+});
+```
+
+</CodeGroup>
+
+<Note>
+Replace `'YOUR_BUGSTER_API_KEY'` with your actual API key from the Bugster dashboard. Initialize Bugster SDK as early as possible in your application's lifecycle.
+</Note>
+
+## Framework-Specific Setup
+
+For framework-specific installation and setup instructions, check our framework guides:
+
+<CardGroup>
+
+<Card
+  title="React"
+  icon="react"
+  href="/framework-guides/react"
+>
+  Setup guide for React applications
+</Card>
+
+<Card
+  title="Next.js"
+  icon="n"
+  href="/framework-guides/next-js"
+>
+  Setup guide for Next.js applications
+</Card>
+
+<Card
+  title="Vue.js"
+  icon="vuejs"
+  href="/framework-guides/vue"
+>
+  Setup guide for Vue.js applications
+</Card>
+
+<Card
+  title="Angular"
+  icon="angular"
+  href="/framework-guides/angular"
+>
+  Setup guide for Angular applications
+</Card>
+
+<Card
+  title="Svelte"
+  icon="code"
+  href="/framework-guides/svelte"
+>
+  Setup guide for Svelte applications
+</Card>
+
+</CardGroup>
+
+## Verifying Installation
+
+To verify your installation:
+
+1. Check your browser's console for the success message
+2. Verify that user interactions are being captured in your Bugster dashboard
+3. Try generating a test case to ensure full functionality
+
+## Troubleshooting
+
+If you encounter any issues:
+
+1. Ensure you're using Node.js version 19.x or later
+2. Clear your npm cache: `npm cache clean --force`
+3. Delete your `node_modules` folder and `package-lock.json` file, then run `npm install` again
+4. Verify your API key is correctly configured
+
+If problems persist, [contact our support team](https://bugster.app/support). 

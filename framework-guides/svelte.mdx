@@ -1,0 +1,80 @@
+---
+title: 'Svelte Integration Guide'
+description: 'Learn how to integrate Bugster SDK into your Svelte application'
+icon: 's'
+---
+
+## Integrate Bugster SDK with Svelte
+
+This guide will help you integrate Bugster SDK into your Svelte project and start using its automated testing capabilities.
+
+---
+
+## Prerequisites
+
+Before getting started, ensure you have:
+
+- A Svelte project set up (version 3.0 or later)
+- Node.js and npm installed
+- A Bugster account with an API key
+
+---
+
+## Step 1: Install the Bugster SDK
+
+Install Bugster SDK using your package manager:
+
+```bash
+npm i @bugster/bugster-js
+```
+
+---
+
+## Step 2: Add Environment Variables
+
+Add your environment variables to your `.env.local` file and your hosting provider (such as Vercel, Netlify, AWS).
+
+```bash
+BUGSTER_KEY=YOUR_API_KEY
+```
+
+---
+
+## Step 3: Initialize Bugster SDK
+
+To initialize Bugster SDK in your Svelte application, follow these steps:
+
+1. Import the ```BugsterTracker``` into your Svelte component.
+2. Initialize the SDK inside the ```onMount``` lifecycle function to ensure it runs after the component mounts.
+
+Here is how you can do it:
+
+```javascript
+import { BugsterTracker } from '@bugster/bugster-js';
+import { onMount } from 'svelte';
+
+let bugster = null;
+
+onMount(() => {
+  if (typeof window !== 'undefined' && !bugster) {
+    bugster = new BugsterTracker({
+      apiKey: process.env.BUGSTER_KEY,
+      endpoint: "https://i.bugster.app",
+    });
+  }
+});
+```
+
+This will ensure the SDK is properly initialized after the component mounts.
+
+---
+
+## Conclusion
+
+You've now successfully integrated Bugster SDK into your Svelte application. This integration allows you to capture user interactions, generate automated tests, and improve the overall quality of your Svelte app.
+
+For more advanced usage and configuration options, refer to the [Bugster SDK API Reference](/api-reference) and the [Advanced Configuration Guide](/advanced-configuration).
+
+If you encounter any issues or have questions, don't hesitate to [contact our support team](https://bugster.app/contact).
+ 
+ 

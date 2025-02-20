@@ -1,0 +1,134 @@
+---
+title: 'Quick Start Guide'
+description: 'Get up and running with Bugster SDK in minutes'
+icon: 'bolt'
+---
+
+This Quick Start Guide will walk you through the process of integrating Bugster SDK into your web application and generating your first automated test. By the end of this guide, you'll have Bugster SDK set up and capturing user interactions.
+
+## Step 1: Install Bugster SDK
+
+First, install the Bugster SDK package in your project:
+
+<CodeGroup>
+
+```bash npm
+npm install @bugster/bugster-js
+```
+
+```bash yarn
+yarn add @bugster/bugster-js
+```
+
+```bash pnpm
+pnpm add @bugster/bugster-js
+```
+
+</CodeGroup>
+
+## Step 2: Import and Initialize Bugster SDK
+
+Add the following code to your main JavaScript or TypeScript file:
+
+<CodeGroup>
+
+```javascript JavaScript
+import BugsterTracker from '@bugster/bugster-js';
+
+BugsterTracker.init({
+  apiKey: 'YOUR_BUGSTER_API_KEY',
+});
+```
+
+```typescript TypeScript
+import {BugsterTracker} from '@bugster/bugster-js';
+
+BugsterTracker.init({
+  apiKey: 'YOUR_BUGSTER_API_KEY',
+});
+```
+
+</CodeGroup>
+
+Replace `'YOUR_BUGSTER_API_KEY'` with your actual Bugster api key.
+
+<Note>
+You can find your api key in the Bugster dashboard under Project Settings.
+</Note>
+
+## Step 3: Verify Installation
+
+To ensure Bugster SDK is initialized correctly, add a callback function:
+
+```javascript
+BugsterTracker.init({
+  apiKey: 'YOUR_BUGSTER_API_KEY',
+  onInitialized: () => {
+    console.log('Bugster SDK initialized successfully!');
+  },
+});
+```
+
+Run your application and check the browser console for the success message.
+
+## Step 4: Capture User Interactions
+
+Once initialized, Bugster SDK automatically starts capturing user interactions. No additional code is required for basic capturing.
+
+To test this:
+1. Run your application
+2. Perform some typical user actions (e.g., click buttons, fill forms) or a determinated user flow.
+3. These interactions will be sent to the Bugster servers
+
+## Step 5: View Captured User Stories
+
+To view the captured interactions:
+
+1. Log in to your [Bugster Dashboard](https://bugster.app/dashboard)
+2. Navigate to User Stories
+3. Watch catpured User stories grouped by feature
+
+You should see a list of recent user interactions from your application.
+
+## Step 6: Generate Your First Test
+
+Now that you've captured some interactions, let's generate a test:
+
+1. In the Bugster Dashboard, go to "User Stories"
+2. Select a User Story or a sequence of interactions you want to turn into a test
+3. Click "Generate Test"
+4. Review the generated test script
+5. Click "Save Test" to add it to your test suite
+
+## Step 7: Run Your Generated Test
+
+To run your newly generated test:
+
+1. In the Bugster Dashboard, go to "Test Suite"
+2. Find your new test in the list
+3. Click "Run Test"
+4. Wait for the test to complete and view the results
+
+<Tip>
+You can also run tests locally or integrate them into your CI/CD pipeline. Check our [Test Execution Guide](/test-execution) for more details.
+</Tip>
+
+## Next Steps
+
+Congratulations! You've successfully set up Bugster SDK, captured user interactions, and generated your first automated test. Here are some next steps to explore:
+
+- [Customize Interaction Capturing](/api-reference/customization): Learn how to fine-tune what interactions are captured
+- [Test Management](/test-management/group-and-organize): Organize and manage your growing test suite
+- [CI/CD Integration](/test-execution/cicd-integration): Integrate Bugster tests into your continuous integration workflow
+- [Advanced Configuration](/api-reference/advanced-configuration): Explore advanced configuration options for Bugster SDK
+
+## Troubleshooting
+
+If you encounter any issues:
+
+- Ensure your `apiKey` is correct
+- Check that you're initializing Bugster SDK early in your application lifecycle
+- Review our [Troubleshooting Guide](/troubleshooting) for common issues and solutions
+
+If you need further assistance, don't hesitate to [contact our support team](https://bugster.app/support).
+

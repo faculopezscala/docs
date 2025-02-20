@@ -1,0 +1,66 @@
+---
+title: 'Performance'
+description: "Understanding Bugster's performance impact on your application"
+icon: 'gauge'
+---
+
+## Performance Impact
+
+Bugster SDK is designed to have minimal impact on your application:
+
+- Lightweight bundle size (~20KB gzipped)
+- Efficient event processing
+- Optimized data collection
+- Minimal CPU usage
+
+## Benchmarks
+
+Typical performance metrics:
+
+- **Bundle Size**: 20KB gzipped
+- **CPU Overhead**: < 1% on average
+- **Memory Usage**: 2-5MB
+- **Network Impact**: ~50KB per 15 minutes of active use
+
+## Optimization Features
+
+Control Bugster's resource usage:
+
+```javascript
+BugsterTracker.init({
+  apiKey: 'YOUR_API_KEY',
+  performance: {
+    maxEventsPerMinute: 100, // Limit event collection rate
+    batchSize: 50, // Number of events per batch
+    flushInterval: 30000, // Flush interval in milliseconds
+    samplingRate: 1.0 // Event sampling rate (0.0 to 1.0)
+  }
+});
+```
+
+## Best Practices
+
+1. **Event Throttling**: Configure appropriate event limits
+2. **Batch Processing**: Use batch processing for event sending
+3. **Sampling**: Implement sampling for high-traffic applications
+4. **Resource Monitoring**: Regular performance monitoring
+
+## Advanced Configuration
+
+Fine-tune performance for your specific needs:
+
+- Custom event batching
+- Selective event capture
+- Network optimization
+- Memory management
+
+## Monitoring Tools
+
+Monitor Bugster's performance impact:
+
+1. Built-in performance metrics
+2. Integration with popular monitoring tools
+3. Custom performance alerts
+4. Resource usage dashboard
+
+For detailed performance analysis or custom optimization, contact our [support team](mailto:support@bugster.app). 

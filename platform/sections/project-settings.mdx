@@ -1,0 +1,70 @@
+---
+title: 'Project Settings'
+description: 'Configure and manage your project settings'
+icon: 'gear'
+---
+
+The Project Settings section in Bugster provides a comprehensive suite of configuration options to customize and optimize your testing environment. In this documentation, we'll walk through each tab of the project settings, explaining their functionality and how to make the most of each feature.
+
+Let's explore each tab in detail:
+
+## Project Settings Tabs
+
+### Test Management
+Configure your testing environment and browser settings to ensure consistent test execution across your project.
+
+- **Browser Configuration**: Select which browsers to use for testing (Chromium, Firefox, etc.)
+- **Screen Size**: Set default width and height for testing viewport
+- **Environment URLs**: Configure and manage URLs for production and development environments
+
+<video width="100%" controls>
+  <source src="/media/test-management.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+### Features
+Visualize and manage your application's structure through an interactive flow graph.
+
+- **Feature Graph**: View your application's structure with base URL and all sections
+- **Custom Features**: Add features that weren't automatically detected
+- **Edit Features**: Modify names and properties of existing features
+
+<video width="100%" controls>
+  <source src="/media/features-graph.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+### Credentials
+Manage testing credentials for your application.
+
+- **Add Credentials**: Create new testing accounts
+- **Edit Credentials**: Modify existing credential sets
+- **Default Selection**: Choose default credentials for your project
+
+<video width="100%" controls>
+  <source src="/media/credentials.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+### SDK
+The SDK section provides everything you need to integrate Bugster into your frontend application. Here you'll find your API key and comprehensive installation guides for the most common frameworks.
+
+<video width="100%" controls>
+  <source src="/media/sdk-1.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+Once you've accessed your API key, you'll need to integrate the SDK into your project. Visit our [SDK Integration Guide](/sdk) for detailed instructions on implementing the code snippet for your specific framework. After completing the integration, return here to verify your setup.
+
+After adding the code snippet to your project, you can verify the integration status by clicking the refresh button:
+
+![SDK Status Refresh](/media/sdk-load.gif)
+
+Once properly configured, you'll have full control over your SDK implementation. You can remotely activate or deactivate the SDK at any time, which is useful when you want to temporarily stop event collection:
+
+<video width="100%" controls>
+  <source src="/media/sdk-2.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+This remote activation/deactivation feature gives you complete control over when Bugster collects events from your application, allowing you to manage data collection according to your needs.

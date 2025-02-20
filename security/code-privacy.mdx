@@ -1,0 +1,62 @@
+---
+title: 'Code Privacy'
+description: 'How Bugster protects your source code and intellectual property'
+icon: 'code'
+---
+
+## Code Protection
+
+Bugster is designed to protect your source code and intellectual property:
+
+- No source code storage
+- Minimal code inspection
+- Secure test generation
+- Protected intellectual property
+
+## How It Works
+
+1. **Local Processing**: Most code analysis happens locally in the browser
+2. **Minimal Data Transfer**: Only necessary interaction data is sent to our servers
+3. **No Code Storage**: Your source code never leaves your environment
+4. **Secure Test Generation**: Tests are generated without exposing business logic
+
+## Configuration Options
+
+Control how Bugster interacts with your code:
+
+```javascript
+BugsterTracker.init({
+  apiKey: 'YOUR_API_KEY',
+  codePrivacy: {
+    excludeScripts: true, // Don't collect script content
+    maskSelectors: ['.sensitive-class'], // Mask sensitive elements
+    ignoreComments: true, // Don't collect code comments
+    maskAttributes: ['data-secret'] // Mask sensitive attributes
+  }
+});
+```
+
+## Security Features
+
+- **Code Obfuscation**: Sensitive code paths are automatically obfuscated
+- **Selective Recording**: Control which parts of your application are monitored
+- **Data Masking**: Automatically mask sensitive code patterns
+- **Access Control**: Fine-grained control over who can access generated tests
+
+## Best Practices
+
+1. Use the configuration options to exclude sensitive code areas
+2. Regularly review recorded interactions in your dashboard
+3. Implement proper access controls for your team
+4. Keep your Bugster SDK up to date for latest security features
+
+## Enterprise Features
+
+Enterprise customers get additional code protection features:
+
+- Custom code exclusion patterns
+- Advanced IP protection
+- Dedicated security review
+- Custom security policies
+
+For more information about enterprise features, contact our [sales team](mailto:sales@bugster.app). 

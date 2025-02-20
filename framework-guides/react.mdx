@@ -1,0 +1,72 @@
+---
+title: 'React Integration Guide'
+description: 'Learn how to integrate Bugster SDK into your React application'
+icon: 'react'
+---
+
+## Integrate Bugster SDK with React
+
+This guide will help you integrate Bugster SDK into your React project and start using its automated testing capabilities.
+
+---
+
+## Prerequisites
+
+Before getting started, ensure you have:
+
+- A React project set up (version 16.8 or later, with hooks support)
+- Node.js and npm installed
+- A Bugster account with an API key
+
+---
+
+## Step 1: Install Bugster SDK
+
+Install Bugster SDK using your package manager:
+
+```bash
+npm i @bugster/bugster-js
+```
+
+---
+
+## Step 2: Add Environment Variables
+
+Add your environment variables to your `.env.local` file and your hosting provider (such as Vercel, Netlify, AWS). You can find your project API key in your project settings.
+
+```bash
+REACT_APP_BUGSTER_KEY=YOUR_API_KEY
+```
+
+---
+
+
+## Step 3: Initialize
+
+To initialize Bugster SDK, add the following code in your application where it can be initialized globally:
+
+```javascript
+import { BugsterTracker } from '@bugster/bugster-js';
+
+let bugster = null;
+
+if (!bugster) {
+  bugster = new BugsterTracker({
+    apiKey: "YOUR_API_KEY",
+    endpoint: "https://i.bugster.app",
+  });
+}
+
+console.log('Bugster initialized:', bugster);
+```
+
+---
+
+## Conclusion
+
+You've now successfully integrated Bugster SDK into your React.js application. This integration allows you to capture user interactions, generate automated tests, and improve the overall quality of your React app.
+
+For more advanced usage and configuration options, refer to the [Bugster SDK API Reference](/api-reference) and the [Advanced Configuration Guide](/advanced-configuration).
+
+If you encounter any issues or have questions, don't hesitate to [contact our support team](https://bugster.app/contact).
+ 

@@ -1,0 +1,52 @@
+---
+title: 'Suggested Flows'
+description: 'Bugster analyzes your applications real user interactions and suggests new test flows to improve your test coverage. These suggestions are based on the most common user paths detected in your application.'
+icon: 'sparkles'
+---
+
+## Initial Setup
+
+When you first access the Suggested Flows section without connecting the SDK, you'll see this message:
+
+![No SDK Connected](/media/suggested-flow-no-sdk.png)
+
+To start receiving flow suggestions, you'll need to [complete the SDK configuration](/platform/getting-started/sdk-setup). Once the SDK is properly connected, you'll see this status:
+
+![SDK Connected - Waiting for Data](/media/sdk-waiting-data.jpg)
+
+## Data Collection Period
+
+After connecting the SDK, Bugster needs time to analyze user behavior in your application:
+
+- Initial analysis can take up to 24 hours, depending on your user traffic
+- The quality and relevance of suggested flows will improve over time as more data is collected
+- More user interactions lead to better and more accurate suggestions
+
+## Managing Suggested Flows
+
+Once Bugster has collected enough data, you'll see a list of suggested flows with:
+- Flow descriptions
+- Occurrence frequency
+- Relevance indicators
+
+For each suggested flow, you can:
+1. Review the complete flow details by clicking on it
+2. Dismiss irrelevant flows using the thumbs down button
+3. Configure flow settings:
+   - Select credentials
+   - Set the starting path
+   - Choose the target environment
+
+Here's how to add a suggested flow to your test suite:
+
+<video controls>
+  <source src="/media/suggested-flow-completed.mp4" type="video/mp4" />
+</video>
+
+## Benefits
+
+- Automatically identify common user paths
+- Create tests based on real user behavior
+- Improve test coverage efficiently
+- Save time on test creation
+- Focus on testing what matters most to your users 

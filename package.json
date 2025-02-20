@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@naquiao/bugster-sdk": "^1.0.0"
+  }
+}

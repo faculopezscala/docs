@@ -1,0 +1,262 @@
+---
+title: 'CI/CD Integration'
+description: 'Learn how to integrate Bugster SDK tests into your Continuous Integration and Continuous Deployment pipelines'
+icon: 'gears'
+---
+
+## Introduction
+
+Integrating Bugster SDK into your CI/CD pipeline allows you to automate your testing process, ensuring that every code change is thoroughly tested before deployment. This guide will walk you through the process of setting up Bugster SDK tests in various CI/CD environments and provide best practices for seamless integration.
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- A Bugster SDK account with appropriate access rights
+- Your tests uploaded to the Bugster dashboard
+- Access to your project's CI/CD pipeline
+
+## General CI/CD Integration Steps
+
+Regardless of your specific CI/CD tool, the general integration process involves:
+
+1. Installing Bugster CLI in your CI environment
+2. Authenticating with Bugster
+3. Configuring test execution
+4. Running tests as part of your pipeline
+5. Processing test results
+
+Let's break these down in detail.
+
+## Step 1: Installing Bugster CLI
+
+Add the following command to your CI script:
+
+```bash
+npm install -g @bugster/cli
+```
+
+## Step 2: Authentication
+
+Securely authenticate with Bugster using environment variables:
+
+1. In your Bugster dashboard, generate a CI token (Settings > API Tokens > Generate CI Token)
+2. Add this token as a secure environment variable in your CI/CD tool (usually named `BUGSTER_CI_TOKEN`)
+3. In your CI script, authenticate using:
+
+```bash
+bugster auth ci-login
+```
+
+This command automatically uses the `BUGSTER_CI_TOKEN` environment variable.
+
+## Step 3: Configuring Test Execution
+
+Create a `bugster.config.js` file in your project root:
+
+```javascript
+module.exports = {
+  apiKey: 'YOUR_BUGSTER_API_KEY',
+  ciConfig: {
+    testSuite: 'CI Suite',
+    browser: ['chrome', 'firefox'],
+    parallel: 4
+  }
+};
+```
+
+## Step 4: Running Tests
+
+Add the test execution command to your CI script:
+
+```bash
+bugster tests run --ci
+```
+
+## Step 5: Processing Results
+
+Handle the test results in your pipeline:
+
+```bash
+bugster results process --fail-on-error
+```
+
+This command will exit with a non-zero code if any tests fail, allowing your CI/CD tool to halt the pipeline if necessary.
+
+## Integration with Popular CI/CD Tools
+
+### GitHub Actions
+
+```yaml
+name: Bugster SDK Tests
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm ci
+      - name: Install Bugster CLI
+        run: npm install -g @bugster/cli
+      - name: Run Bugster Tests
+        run: |
+          bugster auth ci-login
+          bugster tests run --ci
+          bugster results process --fail-on-error
+        env:
+          BUGSTER_CI_TOKEN: ${{ secrets.BUGSTER_CI_TOKEN }}
+```
+
+### GitLab CI
+
+```yaml
+stages:
+  - test
+
+bugster_tests:
+  stage: test
+  image: node:14
+  script:
+    - npm install -g @bugster/cli
+    - bugster auth ci-login
+    - bugster tests run --ci
+    - bugster results process --fail-on-error
+  variables:
+    BUGSTER_CI_TOKEN: $BUGSTER_CI_TOKEN
+```
+
+### Jenkins
+
+```groovy
+pipeline {
+    agent any
+    
+    environment {
+        BUGSTER_CI_TOKEN = credentials('bugster-ci-token')
+    }
+    
+    stages {
+        stage('Test') {
+            steps {
+                sh 'npm install -g @bugster/cli'
+                sh 'bugster auth ci-login'
+                sh 'bugster tests run --ci'
+                sh 'bugster results process --fail-on-error'
+            }
+        }
+    }
+}
+```
+
+## Advanced CI/CD Configurations
+
+### Conditional Test Execution
+
+Run different test suites based on the branch:
+
+```bash
+if [ "$CI_BRANCH" = "main" ]; then
+  bugster tests run --suite "Full Regression"
+else
+  bugster tests run --suite "Smoke Tests"
+fi
+```
+
+### Parallel Execution in Matrix Builds
+
+For CI systems supporting matrix builds, you can parallelize across different configurations:
+
+```yaml
+strategy:
+  matrix:
+    browser: [chrome, firefox, safari]
+    
+steps:
+  - run: bugster tests run --ci --browser ${{ matrix.browser }}
+```
+
+### Artifact Management
+
+Save test results and logs as build artifacts:
+
+```bash
+bugster artifacts download --run-id $BUGSTER_RUN_ID --output-dir ./test-artifacts
+```
+
+Then, configure your CI tool to store the `./test-artifacts` directory.
+
+## Best Practices for CI/CD Integration
+
+1. **Use Dedicated Test Suites**: Create CI-specific test suites that balance coverage and execution time.
+
+2. **Optimize for Speed**: Utilize parallel execution and cloud resources to minimize pipeline duration.
+
+3. **Implement Retry Logic**: Add retry mechanisms for flaky tests to reduce false negatives:
+
+   ```bash
+   bugster tests run --ci --retries 2
+   ```
+
+4. **Leverage Test Splitting**: For large test suites, use Bugster's test splitting feature to distribute tests across multiple CI jobs.
+
+5. **Monitor Test Trends**: Use Bugster's analytics to track test performance over time and identify areas for improvement.
+
+6. **Secure Sensitive Data**: Use your CI/CD tool's secrets management to handle sensitive information like API keys.
+
+7. **Integrate with Code Reviews**: Configure your CI to report test results directly in pull/merge requests.
+
+## Troubleshooting CI/CD Integrations
+
+1. **Authentication Issues**: 
+   - Verify that the `BUGSTER_CI_TOKEN` is correctly set and has not expired.
+   - Ensure the token has the necessary permissions.
+
+2. **Test Discovery Problems**: 
+   - Check that your `bugster.config.js` file is correctly configured and committed to the repository.
+   - Verify that the specified test suites or tags exist in your Bugster project.
+
+3. **Environment-Specific Failures**:
+   - Use Bugster's environment variables feature to manage different configurations for CI/CD vs. local development.
+
+4. **Timeout Issues**:
+   - Adjust the CI job timeout and Bugster's test timeout settings:
+     ```bash
+     bugster tests run --ci --timeout 60000
+     ```
+
+5. **Resource Constraints**:
+   - Monitor CPU and memory usage in your CI environment.
+   - Consider upgrading your CI resources or optimizing test execution.
+
+## Analyzing CI/CD Test Results
+
+1. **Bugster Dashboard Integration**: 
+   Configure your CI/CD tool to send a notification to Bugster upon completion:
+   ```bash
+   bugster ci notify --status $CI_STATUS --build-url $CI_BUILD_URL
+   ```
+
+2. **Trend Analysis**:
+   Use Bugster's CI/CD analytics to track:
+   - Test execution time trends
+   - Failure rate by test and suite
+   - Coverage changes over time
+
+3. **Failure Categorization**:
+   Implement tagging for different types of failures (e.g., `#ui-change`, `#api-error`) to facilitate quicker resolution.
+
+## Next Steps
+
+Now that you've integrated Bugster SDK with your CI/CD pipeline, consider exploring:
+
+- [Advanced Test Analytics](/test-analytics/advanced) to gain deeper insights from your automated test results
+- [Test Impact Analysis](/testing-strategies/test-impact-analysis) to optimize which tests run for each code change
+- [Continuous Testing Strategies](/testing-strategies/continuous-testing) to further enhance your DevOps practices
+
+If you encounter any issues or have questions about CI/CD integration, don't hesitate to [contact our support team](https://bugster.app/support) or visit our [community forums](https://community.bugster.app).
+

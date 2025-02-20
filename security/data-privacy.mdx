@@ -1,0 +1,63 @@
+---
+title: 'Data Privacy'
+description: 'Understanding how Bugster handles and protects your data'
+icon: 'shield-check'
+---
+
+## Data Collection
+
+Bugster collects only the minimum necessary data to provide our testing services:
+
+- User interactions (clicks, form inputs, navigation)
+- Page URLs and titles
+- Browser and device information
+- Network requests (configurable)
+
+## Data Protection
+
+We implement multiple layers of security to protect your data:
+
+- End-to-end encryption for all data transmission
+- Secure data storage with industry-standard encryption
+- Regular security audits and penetration testing
+- Compliance with GDPR and other privacy regulations
+
+## Data Retention
+
+- Test data is retained according to your subscription plan
+- Data can be deleted at any time through the dashboard
+- Automatic data purging after retention period
+
+## Configurable Data Collection
+
+Control what data Bugster collects:
+
+```javascript
+BugsterTracker.init({
+  apiKey: 'YOUR_API_KEY',
+  privacy: {
+    maskInputs: true, // Mask sensitive input data
+    ignoreElements: ['password', 'credit-card'], // Ignore specific elements
+    excludeUrls: ['/admin/*'], // Exclude specific URLs
+    maskNetworkRequests: true // Mask network request data
+  }
+});
+```
+
+## GDPR Compliance
+
+Bugster is fully GDPR compliant:
+
+- Data Processing Agreements (DPA) available
+- Right to access and delete data
+- Data portability support
+- Transparent data collection policies
+
+## Security Measures
+
+- SOC 2 Type II certified
+- Regular security assessments
+- Incident response plan
+- 24/7 security monitoring
+
+For more information about our security practices, contact our [security team](mailto:security@bugster.app). 

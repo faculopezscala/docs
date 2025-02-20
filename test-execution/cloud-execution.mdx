@@ -1,0 +1,232 @@
+---
+title: 'Cloud Execution'
+description: 'Learn how to run your Bugster SDK tests in the cloud for scalable and efficient testing'
+icon: 'cloud'
+---
+
+## Introduction
+
+Cloud execution allows you to run your Bugster SDK tests on scalable, managed infrastructure. This approach offers several advantages, including parallel execution, diverse browser and device testing, and reduced local resource usage. This guide will walk you through setting up and utilizing Bugster's cloud execution capabilities.
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- A Bugster SDK account with cloud execution privileges
+- Your tests uploaded to the Bugster dashboard
+- Bugster CLI installed (`npm install -g @bugster/cli`)
+
+## Understanding Cloud Execution
+
+Bugster's cloud execution platform provides:
+
+- Scalable infrastructure for running tests in parallel
+- A wide range of browsers and devices for comprehensive testing
+- Isolated environments for consistent test results
+- Automatic video recording and screenshot capture
+
+## Configuring Cloud Execution
+
+1. **Log in to Bugster CLI**
+
+   If you haven't already, authenticate with Bugster:
+
+   ```bash
+   bugster auth login
+   ```
+
+2. **Configure Your Project**
+
+   Create or update your `bugster.config.js`:
+
+   ```javascript
+   module.exports = {
+     apiKey: 'YOUR_BUGSTER_API_KEY',
+     cloudExecution: {
+       enabled: true,
+       browsers: ['chrome', 'firefox', 'safari'],
+       devices: ['iPhone 12', 'Pixel 5'],
+       parallel: 5
+     }
+   };
+   ```
+
+## Running Tests in the Cloud
+
+1. **Execute All Tests**
+
+   ```bash
+   bugster tests run --cloud
+   ```
+
+2. **Run Specific Tests or Suites**
+
+   ```bash
+   bugster tests run --cloud --suite "Checkout Flow"
+   ```
+
+   ```bash
+   bugster tests run --cloud --tag regression
+   ```
+
+3. **Specify Browsers or Devices**
+
+   ```bash
+   bugster tests run --cloud --browser chrome,firefox
+   ```
+
+   ```bash
+   bugster tests run --cloud --device "iPhone 12"
+   ```
+
+## Monitoring Cloud Execution
+
+1. **Real-time Console Output**
+
+   The CLI will provide real-time updates on test progress.
+
+2. **Bugster Dashboard**
+
+   Log in to the [Bugster Dashboard](https://bugster.app/) to view detailed execution status, including:
+   - Test progress and results
+   - Resource utilization
+   - Video recordings and screenshots
+
+3. **Email Notifications**
+
+   Configure email alerts for test completion or failures in your account settings.
+
+## Analyzing Cloud Test Results
+
+1. **Accessing Results**
+
+   After execution, access detailed results:
+   
+   ```bash
+   bugster results view --latest
+   ```
+
+2. **Downloading Artifacts**
+
+   Download videos, screenshots, and logs:
+
+   ```bash
+   bugster artifacts download --run-id RUN_ID
+   ```
+
+3. **Comparing Across Environments**
+
+   Use the dashboard to compare cloud results with local or CI executions.
+
+## Best Practices for Cloud Execution
+
+1. **Optimize for Parallelization**: Structure your tests to run independently for maximum parallel execution.
+
+2. **Use Cloud-Specific Configurations**: Leverage cloud-only capabilities in your test configurations.
+
+3. **Manage Test Data**: Use Bugster's data management features for consistent test data across environments.
+
+4. **Regular Maintenance**: Periodically review and update your cloud execution settings to ensure optimal performance.
+
+5. **Cost Management**: Monitor usage and adjust parallelization to balance speed and cost.
+
+## Advanced Cloud Execution Features
+
+### 1. Custom Execution Environments
+
+Define custom Docker images for specific test requirements:
+
+```javascript
+cloudExecution: {
+  customEnvironments: [
+    {
+      name: 'custom-node-env',
+      dockerImage: 'your-registry/custom-node:14'
+    }
+  ]
+}
+```
+
+### 2. Geolocation Testing
+
+Specify geographic locations for your tests:
+
+```bash
+bugster tests run --cloud --geo-location "US-East"
+```
+
+### 3. Network Condition Simulation
+
+Simulate various network conditions:
+
+```bash
+bugster tests run --cloud --network-profile "3G"
+```
+
+### 4. Scheduled Executions
+
+Set up recurring cloud executions:
+
+```bash
+bugster schedule create --name "Daily Regression" --cron "0 1 * * *" --suite "Regression"
+```
+
+## Troubleshooting Cloud Execution
+
+1. **Tests Failing in Cloud but Passing Locally**
+   - Check for environment-specific configurations
+   - Verify that all required dependencies are included in the cloud environment
+
+2. **Slow Execution Times**
+   - Increase parallelization
+   - Review test structure for unnecessary waits or long-running operations
+
+3. **Resource Limits Reached**
+   - Adjust concurrency settings
+   - Contact support to increase account limits if needed
+
+4. **Network-Related Failures**
+   - Check if your application is accessible from cloud environments
+   - Verify any required VPN or firewall configurations
+
+## Security and Compliance
+
+Bugster's cloud execution platform is designed with security in mind:
+
+- All data is encrypted in transit and at rest
+- Isolated execution environments for each run
+- Compliance with SOC 2 and GDPR regulations
+- Option for dedicated cloud instances for enhanced security
+
+## Cost Management
+
+Monitor and control cloud execution costs:
+
+1. Set budget alerts in your account settings
+2. Use the `--dry-run` flag to estimate execution costs:
+   ```bash
+   bugster tests run --cloud --dry-run
+   ```
+3. Optimize test suites to reduce unnecessary executions
+
+## Integrating Cloud Execution with CI/CD
+
+1. Use Bugster's CI/CD integrations to trigger cloud executions:
+
+   ```yaml
+   - name: Run Bugster Tests in Cloud
+     run: bugster tests run --cloud --tag ci
+   ```
+
+2. Incorporate cloud test results into your deployment decision process
+
+## Next Steps
+
+Now that you're familiar with cloud execution, consider exploring:
+
+- [CI/CD Integration](/test-execution/ci-cd-integration) for a fully automated testing pipeline
+- [Advanced Test Analytics](/test-analytics/advanced) to gain deeper insights from your cloud test results
+- [Cross-Browser Testing Strategies](/testing-strategies/cross-browser) to leverage the full potential of cloud execution
+
+If you encounter any issues or have questions about cloud execution, don't hesitate to [contact our support team](https://bugster.app/support) or visit our [community forums](https://community.bugster.app).
+

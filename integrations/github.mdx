@@ -1,0 +1,75 @@
+---
+title: 'GitHub Integration'
+description: 'Connect your Bugster E2E tests with GitHub to run them automatically on your pull requests. This integration lets you configure when your existing Bugster tests should run and have their results posted as comments on your PRs.'
+icon: 'github'
+---
+
+## Setup Process
+
+### 1. GitHub Configuration
+Watch our detailed video tutorial on installing and configuring the GitHub App:
+
+<video 
+  controls
+  className="w-full aspect-video"
+  src="/media/gh-1v.mp4"
+></video>
+
+This video shows how to:
+- Install the Bugster GitHub App
+- Grant repository access
+- Choose which repositories to connect
+- Set up permissions for PR comments
+
+### 2. Bugster Configuration
+After installation, configure when your E2E tests should run:
+
+<video 
+  controls
+  className="w-full aspect-video"
+  src="/media/gh-2v.mp4"
+></video>
+
+You'll set up:
+- Target repository (e.g., bugster-app-client)
+- Target branch (e.g., Developp)
+- When to run tests (on pull requests or commits)
+- Which test groups to execute
+
+## Configuration Options
+
+### Repository Settings
+In Bugster, you'll specify:
+
+1. **Repository**: Pick which repository to run tests on
+2. **Branch**: Select the target branch
+3. **Actions**: Choose when to run your tests:
+   - On pull requests
+   - On commits
+   - Both
+4. **Test Groups**: Pick which [Flow groups](/platform/sections/flow-groups) of tests to run
+
+## Features
+
+- Run your E2E tests automatically on PRs or commits
+- Get test results as PR comments
+- See test execution status in GitHub checks
+- Choose different test groups for different scenarios
+
+## Best Practices
+
+- Set up different test groups for different types of changes
+- Configure which branches should trigger test runs
+- Use clear test group names
+- Monitor test execution times
+
+## Troubleshooting
+
+Common issues and solutions:
+
+- **Permission Issues**: Check GitHub App installation permissions
+- **Missing Test Results**: Verify your action and branch settings
+- **Test Group Problems**: Confirm your test group configuration
+- **PR Comment Issues**: Check GitHub permissions for comments
+
+Need help? Contact our support team. 

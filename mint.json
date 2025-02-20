@@ -1,0 +1,83 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Bugster",
+  "logo": {
+    "dark": "/logo/LOGOTYPE-VIOLET-LIGHT.png",
+    "light": "/logo/LOGOTYPE-VIOLET-DARK.png"
+  },
+  "favicon": "/logo/logo.jpeg",
+  "colors": {
+    "primary": "#363D61",
+    "dark": "#363D61",
+    "light": "#C6CBEB",
+    "background": {
+      "dark": "#17171b"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:ignacio@bugster.app"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://bugster.app/dashboard"
+  },
+  "anchors": [
+    {
+      "name": "Discord",
+      "icon": "discord",
+      "url": "https://dub.sh/TKZymDH"
+    },
+    {
+      "name": "Blog",
+      "icon": "newspaper",
+      "url": "https://www.bugster.dev/blog"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Platform",
+      "icon": "rocket",
+      "pages": [
+        "platform/introduction",
+        "platform/sections/existing-flows",
+        "platform/sections/suggested-flows",
+        "platform/sections/flow-executions",
+        "platform/sections/flow-groups",
+        "platform/sections/project-settings"
+
+      ]
+    },
+    {
+      "group": "Bugster SDK",
+      "icon": "code",
+      "pages": [
+        "sdk/installation",
+        {
+          "group": "Framework Guides",
+          "icon": "brackets-curly",
+          "pages": [
+            "framework-guides/react",
+            "framework-guides/next-js",
+            "framework-guides/vue",
+            "framework-guides/angular",
+            "framework-guides/svelte"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Integrations",
+      "icon": "plug",
+      "pages": ["integrations/github", "integrations/slack"]
+    }
+  ],
+  "footerSocials": {
+    "x": "https://x.com/bugsterdev",
+    "github": "https://github.com/Bugsterapp",
+    "linkedin": "https://www.linkedin.com/company/bugsterdev",
+    "discord": "https://dub.sh/TKZymDH"
+  }
+}

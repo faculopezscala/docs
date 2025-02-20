@@ -1,0 +1,133 @@
+---
+title: 'Introduction to Bugster SDK'
+description: 'Empower your web applications with automated testing and user behavior analysis'
+---
+
+<img
+  className="block dark:hidden"
+  src="/images/key-features.png"
+  alt="Bugster SDK Hero Light"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/key-features.png"
+  alt="Bugster SDK Hero Dark"
+/>
+
+Welcome to the Bugster SDK documentation! Bugster SDK is a powerful tool designed to help developers create robust, user-centric web applications through automated testing and comprehensive user behavior analysis.
+
+## What is Bugster SDK?
+
+Bugster SDK is an advanced software development kit that enables you to:
+
+- Automatically capture and analyze user interactions
+- Generate end-to-end tests based on real user behavior
+- Gain insights into user journeys and pain points
+- Ensure your application performs flawlessly across different scenarios
+
+## Key Features
+
+<CardGroup cols={2}>
+  <Card
+    title="Automated Test Generation"
+    icon="wand-magic-sparkles"
+    href="/core-concepts/test-generation"
+  >
+    Transform real user interactions into comprehensive test suites
+  </Card>
+  <Card
+    title="User Behavior Analysis"
+    icon="chart-mixed"
+    href="/analytics/user-behavior"
+  >
+    Gain deep insights into how users interact with your application
+  </Card>
+  <Card
+    title="Cross-Browser Compatibility"
+    icon="browsers"
+    href="/test-execution/cross-browser"
+  >
+    Ensure your app works flawlessly across different browsers and devices
+  </Card>
+  <Card
+    title="CI/CD Integration"
+    icon="gears"
+    href="/test-execution/ci-cd-integration"
+  >
+    Seamlessly integrate automated tests into your development pipeline
+  </Card>
+</CardGroup>
+
+## Getting Started
+
+New to Bugster SDK? Here's how to get up and running quickly:
+
+<Steps>
+  <Step title="Installation">
+    Install Bugster SDK using npm:
+    ```bash
+    npm install @bugster/bugster-js
+    ```
+  </Step>
+  <Step title="Configuration">
+    Set up Bugster SDK with your API key:
+    ```javascript
+    import BugsterTracker from '@bugster/bugster-js';
+
+    const bugster = new BugsterTracker({
+      apiKey: 'YOUR_API_KEY'
+    });
+    ```
+  </Step>
+  <Step title="Start Tracking">
+    Begin capturing user interactions:
+    ```javascript
+    bugster.capture('button_click', { buttonId: 'submit-form' });
+    ```
+  </Step>
+</Steps>
+
+For a more detailed guide, check out our [Quick Start Guide](/get-started/quick-start).
+
+## Explore the Documentation
+
+<CardGroup cols={2}>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Detailed documentation of Bugster SDK's classes, methods, and configuration options
+  </Card>
+  <Card
+    title="Guides & Tutorials"
+    icon="book-open"
+    href="/guides/introduction"
+  >
+    Step-by-step tutorials and best practices for using Bugster SDK effectively
+  </Card>
+  <Card
+    title="Test Management"
+    icon="clipboard-check"
+    href="/test-management/overview"
+  >
+    Learn how to organize, maintain, and optimize your test suites
+  </Card>
+  <Card
+    title="Privacy & Compliance"
+    icon="shield-check"
+    href="/privacy-compliance"
+  >
+    Understand how Bugster SDK helps you maintain data privacy and regulatory compliance
+  </Card>
+</CardGroup>
+
+## Community and Support
+
+Join our community and get support:
+
+- [GitHub Repository](https://github.com/Bugsterapp/bugster-js) - Contribute to the SDK
+- [Twitter](https://github.com/Bugsterapp) - Follow us for updates and tips
+
+We're excited to see what you'll build with Bugster SDK. Happy coding!
+

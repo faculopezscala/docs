@@ -1,0 +1,217 @@
+---
+title: 'Running Tests Locally'
+description: 'Learn how to execute Bugster SDK tests on your local machine for rapid development and debugging'
+icon: 'laptop-code'
+---
+
+## Introduction
+
+Running tests locally is an essential part of the development process, allowing you to quickly validate changes, debug issues, and ensure the quality of your application before pushing to shared environments. This guide will walk you through the process of setting up and running Bugster SDK tests on your local machine.
+
+## Prerequisites
+
+Before you begin, ensure you have the following:
+
+- Bugster SDK installed in your project
+- Node.js (version 14 or later) installed on your machine
+- Access to your project's test suite in the Bugster dashboard
+
+## Setting Up Your Local Environment
+
+1. **Install Bugster CLI**
+
+   Open your terminal and run:
+
+   ```bash
+   npm install -g @bugster/cli
+   ```
+
+2. **Authenticate with Bugster**
+
+   Run the following command and follow the prompts:
+
+   ```bash
+   bugster auth login
+   ```
+
+3. **Configure Your Project**
+
+   In your project root, create a `bugster.config.js` file:
+
+   ```javascript
+   module.exports = {
+     apiKey: 'YOUR_BUGSTER_API_KEY',
+     apiKey: 'YOUR_API_KEY',
+     testDir: './tests',
+     browsers: ['chrome', 'firefox'],
+     baseUrl: 'http://localhost:3000'
+   };
+   ```
+
+   Replace `YOUR_BUGSTER_API_KEY` and `YOUR_API_KEY` with your actual project details.
+
+## Downloading Tests
+
+To run tests locally, you first need to download them from the Bugster dashboard:
+
+1. Open your terminal in your project directory.
+2. Run the following command:
+
+   ```bash
+   bugster tests download
+   ```
+
+This will download all the tests associated with your project into the `testDir` specified in your config file.
+
+## Running All Tests
+
+To run all downloaded tests:
+
+1. Ensure your application is running locally (e.g., on `http://localhost:3000`).
+2. Open a new terminal window.
+3. Run:
+
+   ```bash
+   bugster tests run
+   ```
+
+## Running Specific Tests
+
+To run a subset of tests:
+
+1. By test file:
+   ```bash
+   bugster tests run ./tests/login.test.js
+   ```
+
+2. By tag:
+   ```bash
+   bugster tests run --tag smoke
+   ```
+
+3. By test suite:
+   ```bash
+   bugster tests run --suite "Critical Path"
+   ```
+
+## Configuring Test Runs
+
+You can customize your test runs using command-line options or by editing your `bugster.config.js` file.
+
+### Command-line Options
+
+- `--browser`: Specify browser(s) to run tests in
+  ```bash
+  bugster tests run --browser chrome,firefox
+  ```
+
+- `--headless`: Run tests in headless mode
+  ```bash
+  bugster tests run --headless
+  ```
+
+- `--parallel`: Set number of parallel test runs
+  ```bash
+  bugster tests run --parallel 4
+  ```
+
+### Configuration File Options
+
+Edit your `bugster.config.js` to set default options:
+
+```javascript
+module.exports = {
+  // ... other options
+  runConfig: {
+    headless: true,
+    parallel: 2,
+    retries: 2,
+    timeout: 30000 // milliseconds
+  }
+};
+```
+
+## Viewing Test Results
+
+After running tests, Bugster CLI will display a summary of the results in your terminal. For a more detailed view:
+
+1. Run tests with the `--report` flag:
+   ```bash
+   bugster tests run --report
+   ```
+
+2. Open the generated HTML report in your browser:
+   ```bash
+   open bugster-report.html
+   ```
+
+## Debugging Failed Tests
+
+When a test fails locally:
+
+1. Re-run the specific failed test with increased verbosity:
+   ```bash
+   bugster tests run ./tests/failed-test.js --debug
+   ```
+
+2. Use the `--stop-on-failure` flag to pause execution at the point of failure:
+   ```bash
+   bugster tests run --stop-on-failure
+   ```
+
+3. Check the screenshots and video recordings in the `./bugster-results` directory.
+
+## Best Practices for Local Test Execution
+
+1. **Run Tests Frequently**: Execute tests after every significant code change.
+
+2. **Use a Consistent Environment**: Ensure your local setup mirrors your CI environment as closely as possible.
+
+3. **Optimize for Speed**: Use parallel execution and headless mode for faster feedback.
+
+4. **Manage Test Data**: Use Bugster's data management features to handle test data consistently across environments.
+
+5. **Version Control Your Config**: Keep your `bugster.config.js` in version control to ensure consistency across the team.
+
+## Troubleshooting Common Issues
+
+- **Tests Failing Locally but Passing in CI**: 
+  - Check for environment-specific configurations.
+  - Ensure all dependencies are installed and up-to-date.
+
+- **Slow Test Execution**: 
+  - Use headless mode and increase parallelization.
+  - Review and optimize wait times in your tests.
+
+- **Browser Launch Failures**: 
+  - Verify that the specified browsers are installed on your machine.
+  - Check for conflicting browser sessions or processes.
+
+- **Network-Related Failures**:
+  - Confirm your application is running and accessible at the specified `baseUrl`.
+  - Check your network connection and firewall settings.
+
+## Integrating with Local Development Workflow
+
+1. **Watch Mode**: Use Bugster's watch mode to automatically run relevant tests as you make changes:
+   ```bash
+   bugster tests run --watch
+   ```
+
+2. **Pre-commit Hooks**: Set up a pre-commit hook to run tests before allowing commits:
+   ```bash
+   npx husky add .husky/pre-commit "bugster tests run --tag quick"
+   ```
+
+3. **IDE Integration**: Use Bugster's IDE plugins for Visual Studio Code or JetBrains IDEs for seamless test execution from your editor.
+
+## Next Steps
+
+Now that you're comfortable running tests locally, you might want to explore:
+
+- [Cloud Execution](/test-execution/cloud-execution) for running tests at scale
+- [CI/CD Integration](/test-execution/ci-cd-integration) to automate your testing pipeline
+- [Advanced Test Writing](/test-writing/advanced-techniques) to create more robust and efficient tests
+
+If you encounter any issues or have questions about running tests locally, don't hesitate to [contact our support team](https://bugster.app/support) or visit our [community forums](https://community.bugster.app).
+
